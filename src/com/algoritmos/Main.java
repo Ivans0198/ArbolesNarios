@@ -3,7 +3,7 @@ package com.algoritmos;
 public class Main {
 
     public static void main(String[] args) {
-        Arbol arbol = new Arbol();
+        ArbolFachada arbol = new ArbolFachada();
         arbol.insertarHijo( "M", "M");
         arbol.insertarHijo( "A", "M");
         arbol.insertarHijo( "G", "A");

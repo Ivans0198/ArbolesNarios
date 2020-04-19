@@ -1,13 +1,12 @@
 package com.algoritmos;
 
-public class Arbol {
+public abstract class Arbol {
 
-    private Nodo cabeza;
-    private int nivel;
-    private int nivelMayor;
+    protected Nodo cabeza;
+    protected int nivel;
+    protected int nivelMayor;
 
-
-    public Nodo obtenerNodo(Nodo p, String dato) {
+    protected Nodo obtenerNodo(Nodo p, String dato) {
         Nodo q = p;
         Nodo aux;
         while (q != null) {
@@ -26,16 +25,7 @@ public class Arbol {
         return q;
     }
 
-    public void mostrarHermanoDeUnDato(String dato) {
-        Nodo nodo = obtenerNodo(cabeza, dato);
-        if (nodo == cabeza) {
-            System.out.println("La cabeza no tiene hermanos");
-        } else {
-            mostrarHermanoDeUnDato(cabeza, nodo.getPadre().getDato(), dato);
-        }
-    }
-
-    private void mostrarHermanoDeUnDato(Nodo p, String padre, String dato) {
+    protected void mostrarHermanoDeUnDato(Nodo p, String padre, String dato) {
         Nodo q = p;
         while (q != null) {
             if (q.getSw() == 1) {
@@ -51,15 +41,10 @@ public class Arbol {
         }
     }
 
-    public void mostrarNodosDeUnNivel(int nivelBuscar) {
-        mostrarNodosDeUnNivel(cabeza, null, nivelBuscar);
-    }
-
-    private void mostrarNodosDeUnNivel(Nodo p, Nodo ant, int nivelBuscar) {
+    protected void mostrarNodosDeUnNivel(Nodo p, Nodo ant, int nivelBuscar) {
         Nodo q = p;
-        Nodo raiz = p;
         while (q != null) {
-            if (ant != null && ant == raiz) {
+            if (ant != null && ant == p) {
                 nivel++;
             }
             if (q.getSw() == 0) {
@@ -75,11 +60,7 @@ public class Arbol {
         }
     }
 
-    public void mostrarDatos() {
-        mostrarDatos(cabeza);
-    }
-
-    private void mostrarDatos(Nodo p) {
+    protected void mostrarDatos(Nodo p) {
         Nodo q = p;
         while (q != null) {
             if (q.getSw() == 1) {
@@ -91,11 +72,7 @@ public class Arbol {
         }
     }
 
-    public void insertarHijo(String dato, String referencia) {
-        insertarHijo(cabeza, null, dato, referencia);
-    }
-
-    private void insertarHijo(Nodo p, Nodo anterior, String dato, String referencia) {
+    protected void insertarHijo(Nodo p, Nodo anterior, String dato, String referencia) {
         if (p == null) {
             cabeza = new Nodo(dato);
             return;
@@ -128,11 +105,7 @@ public class Arbol {
         }
     }
 
-    public void mostrarRaices() {
-        mostrarRaices(cabeza);
-    }
-
-    private void mostrarRaices(Nodo p) {
+    protected void mostrarRaices(Nodo p) {
         Nodo q = p;
         if (q != null) {
             System.out.println(q.getDato());
@@ -145,11 +118,7 @@ public class Arbol {
         }
     }
 
-    public void mostrarHojas() {
-        mostrarHojas(cabeza);
-    }
-
-    private void mostrarHojas(Nodo p) {
+    protected void mostrarHojas(Nodo p) {
         Nodo q = p;
         if (q != null) {
             q = q.getLiga();
@@ -164,11 +133,7 @@ public class Arbol {
         }
     }
 
-    public void mostrarPadreDeUnDato(String dato) {
-        mostrarPadreDeUnDato(cabeza, null, cabeza, dato);
-    }
-
-    private void mostrarPadreDeUnDato(Nodo p, Nodo ant, Nodo padreAnt, String dato) {
+    protected void mostrarPadreDeUnDato(Nodo p, Nodo ant, Nodo padreAnt, String dato) {
         Nodo padre = p;
         if (cabeza.getDato().equals(dato)) {
             System.out.println("No tiene padre");
@@ -191,11 +156,7 @@ public class Arbol {
         }
     }
 
-    public void mostrarNivelDeUnDato(String dato) {
-        mostrarNivelDeUnDato(cabeza, null, dato);
-    }
-
-    private void mostrarNivelDeUnDato(Nodo p, Nodo ant, String dato) {
+    protected void mostrarNivelDeUnDato(Nodo p, Nodo ant, String dato) {
         Nodo q = p;
         Nodo raiz = q;
         while (q != null) {
@@ -215,14 +176,7 @@ public class Arbol {
         }
     }
 
-    public void mostrarAlturaDelArbol() {
-        nivel = 1;
-        nivelMayor = 0;
-        mostrarAlturaDelArbol(cabeza, null);
-        System.out.println("La altura del árbol es: " + nivelMayor);
-    }
-
-    private void mostrarAlturaDelArbol(Nodo p, Nodo ant) {
+    protected void mostrarAlturaDelArbol(Nodo p, Nodo ant) {
         Nodo q = p;
         Nodo raiz = q;
         while (q != null) {
@@ -241,12 +195,8 @@ public class Arbol {
         }
     }
 
-    public void mostrarHijosDeUnDato(String dato) {
-        mostrarHijosDeUnDato(cabeza, dato);
-    }
-
     //TODO retornar boolean si encontró o no, para imprimir en caso de no haber encontrado hijos
-    private void mostrarHijosDeUnDato(Nodo p, String dato) {
+    protected void mostrarHijosDeUnDato(Nodo p, String dato) {
         Nodo q = p;
         while (q != null) {
             if (q.getSw() == 1) {
@@ -261,16 +211,12 @@ public class Arbol {
         }
     }
 
-    public void mostrarGradoDelArbol() {
-        mostrarGradoDelArbol(cabeza);
-    }
-
-    private void mostrarGradoDelArbol(Nodo p) {
+    protected void mostrarGradoDelArbol(Nodo p) {
         int gradoDelArbol = contarGradoDelArbol(p);
         System.out.println("El grado del arbol es: " + gradoDelArbol);
     }
 
-    public int contarGradoDelArbol(Nodo p) {
+    protected int contarGradoDelArbol(Nodo p) {
         int contLocal = 0;
         int contGlobal = 0;
         Nodo q = p;
@@ -287,23 +233,15 @@ public class Arbol {
             }
             q = q.getLiga();
         }
-        if (contLocal >= contGlobal) {
-            return contLocal;
-        } else {
-            return contGlobal;
-        }
+        return Math.max(contLocal, contGlobal);
     }
 
-    public void mostrarGradoDeUnNodo(String dato) {
-        mostrarGradoDeUnNodo(cabeza, dato);
-    }
-
-    private void mostrarGradoDeUnNodo(Nodo p, String dato) {
+    protected void mostrarGradoDeUnNodo(Nodo p, String dato) {
         int gradoNodo = contarGradoDeUnNodo(p, dato);
         System.out.println("El grado del nodo es: " + gradoNodo);
     }
 
-    private int contarGradoDeUnNodo(Nodo p, String dato) {
+    protected int contarGradoDeUnNodo(Nodo p, String dato) {
         Nodo q = p;
         int cont = 0;
         while (q != null) {
@@ -319,16 +257,7 @@ public class Arbol {
         return cont;
     }
 
-    public void mostrarTotalRaices() {
-        int totalRaices = contarRaices(cabeza);
-        System.out.println("Total raices: " + totalRaices);
-    }
-
-    public int contarRaices() {
-        return contarRaices(cabeza);
-    }
-
-    public int contarRaices(Nodo p) {
+    protected int contarRaices(Nodo p) {
         Nodo q = p;
         int cantidadRaices = 0;
         if (q != null) {
@@ -343,16 +272,7 @@ public class Arbol {
         return cantidadRaices;
     }
 
-    public void mostrarTotalHojas() {
-        int totalHojas = contarHojas(cabeza);
-        System.out.println("Total hojas: " + totalHojas);
-    }
-
-    public int contarHojas() {
-        return contarHojas(cabeza);
-    }
-
-    public int contarHojas(Nodo p) {
+    protected int contarHojas(Nodo p) {
         int cantidadHojas = 0;
         Nodo q = p;
         if (p != null) {
