@@ -1,5 +1,7 @@
 package com.algoritmos;
 
+import javax.swing.*;
+
 public class ArbolFachada extends Arbol {
 
     public ArbolFachada() {
@@ -9,7 +11,7 @@ public class ArbolFachada extends Arbol {
     public void mostrarHermanoDeUnDato(String dato) {
         Nodo nodo = obtenerNodo(cabeza, dato);
         if (nodo == cabeza) {
-            System.out.println("La cabeza no tiene hermanos");
+            JOptionPane.showMessageDialog(null,"La cabeza no tiene hermanos");
         } else {
             mostrarHermanoDeUnDato(cabeza, nodo.getPadre().getDato(), dato);
         }
@@ -25,6 +27,10 @@ public class ArbolFachada extends Arbol {
 
     public void insertarHijo(String dato, String referencia) {
         insertarHijo(cabeza, null, dato, referencia);
+    }
+
+    public void insertarRaizPrincipal(String dato) {
+        insertarHijo(cabeza, null, dato, "");
     }
 
     public void mostrarRaices() {
@@ -47,7 +53,7 @@ public class ArbolFachada extends Arbol {
         nivel = 1;
         nivelMayor = 0;
         mostrarAlturaDelArbol(cabeza, null);
-        System.out.println("La altura del árbol es: " + nivelMayor);
+        JOptionPane.showMessageDialog(null, "La altura del árbol es: " + nivelMayor);
     }
 
     public void mostrarHijosDeUnDato(String dato) {

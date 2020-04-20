@@ -1,5 +1,7 @@
 package com.algoritmos;
 
+import javax.swing.*;
+
 public abstract class Arbol {
 
     protected Nodo cabeza;
@@ -34,28 +36,28 @@ public abstract class Arbol {
                 //Padre siempre es diferente de null excepto en la cabeza.
                 //Podria validarse q.getPadre != null o q != cabeza
                 if (q != cabeza && q.getPadre().getDato().equals(padre) && !q.getDato().equals(dato)) {
-                    System.out.println(q.getDato());
+                    JOptionPane.showMessageDialog(null, q.getDato());
                 }
             }
             q = q.getLiga();
         }
     }
 
-    protected void mostrarNodosDeUnNivel(Nodo p, Nodo ant, int nivelBuscar) {
+    protected void mostrarNodosDeUnNivel(Nodo p, Nodo anterior, int nivelBuscar) {
         Nodo q = p;
         while (q != null) {
-            if (ant != null && ant == p) {
+            if (anterior != null && anterior == p) {
                 nivel++;
             }
             if (q.getSw() == 0) {
                 if (nivel == nivelBuscar) {
-                    System.out.println("Dato -->" + q.getDato());
+                    JOptionPane.showMessageDialog(null, "Dato -->" + q.getDato());
                 }
             } else {
                 mostrarNodosDeUnNivel(q.getLigaLista(), q, nivelBuscar);
                 nivel = nivel - 1;
             }
-            ant = q;
+            anterior = q;
             q = q.getLiga();
         }
     }
@@ -66,7 +68,7 @@ public abstract class Arbol {
             if (q.getSw() == 1) {
                 mostrarDatos(q.getLigaLista());
             } else {
-                System.out.println(q.getDato());
+                JOptionPane.showMessageDialog(null, q.getDato());
             }
             q = q.getLiga();
         }
@@ -108,7 +110,7 @@ public abstract class Arbol {
     protected void mostrarRaices(Nodo p) {
         Nodo q = p;
         if (q != null) {
-            System.out.println(q.getDato());
+            JOptionPane.showMessageDialog(null, q.getDato());
         }
         while (q != null) {
             if (q.getSw() == 1) {
@@ -125,7 +127,7 @@ public abstract class Arbol {
         }
         while (q != null) {
             if (q.getSw() == 0) {
-                System.out.println(q.getDato());
+                JOptionPane.showMessageDialog(null, q.getDato());
             } else {
                 mostrarHojas(q.getLigaLista());
             }
@@ -136,7 +138,7 @@ public abstract class Arbol {
     protected void mostrarPadreDeUnDato(Nodo p, Nodo ant, Nodo padreAnt, String dato) {
         Nodo padre = p;
         if (cabeza.getDato().equals(dato)) {
-            System.out.println("No tiene padre");
+            JOptionPane.showMessageDialog(null, "No tiene padre");
             return;
         }
         while (p != null) {
@@ -145,9 +147,9 @@ public abstract class Arbol {
             } else {
                 if (p.getDato().equals(dato)) {
                     if (ant == null || ant.getLigaLista() == p) {
-                        System.out.println("El padre de " + dato + " es: " + padreAnt.getDato());
+                        JOptionPane.showMessageDialog(null, "El padre de " + dato + " es: " + padreAnt.getDato());
                     } else {
-                        System.out.println("El padre de " + dato + " es " + padre.getDato());
+                        JOptionPane.showMessageDialog(null, "El padre de " + dato + " es " + padre.getDato());
                     }
                 }
             }
@@ -165,7 +167,7 @@ public abstract class Arbol {
             }
             if (q.getSw() == 0) {
                 if (q.getDato().equals(dato)) {
-                    System.out.println("El nivel es: " + nivel);
+                    JOptionPane.showMessageDialog(null, "El nivel es: " + nivel);
                 }
             } else {
                 mostrarNivelDeUnDato(q.getLigaLista(), q, dato);
@@ -204,7 +206,7 @@ public abstract class Arbol {
             } else {
                 //Se valida q != cabeza porque la cabeza nunca va a tener padre
                 if (q != cabeza && q.getPadre().getDato().equals(dato)) {
-                    System.out.println(q.getDato());
+                    JOptionPane.showMessageDialog(null, q.getDato());
                 }
             }
             q = q.getLiga();
@@ -213,7 +215,7 @@ public abstract class Arbol {
 
     protected void mostrarGradoDelArbol(Nodo p) {
         int gradoDelArbol = contarGradoDelArbol(p);
-        System.out.println("El grado del arbol es: " + gradoDelArbol);
+        JOptionPane.showMessageDialog(null, "El grado del arbol es: " + gradoDelArbol);
     }
 
     protected int contarGradoDelArbol(Nodo p) {
@@ -238,7 +240,7 @@ public abstract class Arbol {
 
     protected void mostrarGradoDeUnNodo(Nodo p, String dato) {
         int gradoNodo = contarGradoDeUnNodo(p, dato);
-        System.out.println("El grado del nodo es: " + gradoNodo);
+        JOptionPane.showMessageDialog(null, "El grado del nodo es: " + gradoNodo);
     }
 
     protected int contarGradoDeUnNodo(Nodo p, String dato) {
